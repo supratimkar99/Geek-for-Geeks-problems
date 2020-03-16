@@ -1,0 +1,42 @@
+static int[] climbingLeaderboard(int[] scores, int[] alice) {
+        ArrayList<Integer> al=new ArrayList<Integer>();
+        int n,temp=0,l,h,m,n1,c=0,flag;
+        n1=alice.length;
+        int res[]=new int[n1];
+        for(int i:scores)
+        {
+            if(!al.contains(i))
+            al.add(i);
+        }
+        n=al.size();
+        m=n-1;
+        for(int j:alice)
+        {
+            l=0;
+            h=m;
+            flag=0;
+            while(l<=h)
+            {
+                m=(l+h)/2;
+                if(j>al.get(m))
+                    h=m-1;
+                else if(j<al.get(m))
+                    l=m+1;
+                else
+                {    
+                    res[c]=m+1;
+                    flag=1;
+                    break;
+                }
+            }
+            if(flag==0)
+            {
+                if(j>al.get(m))
+                    res[c]=m+1;
+                else
+                    res[c]=m+2;
+            }
+            c++;
+        }
+        return res;  
+    }
