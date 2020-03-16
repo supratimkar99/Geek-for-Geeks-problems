@@ -1,0 +1,43 @@
+class Result {
+
+    /*
+     * Complete the 'diagonalDifference' function below.
+     *
+     * The function is expected to return an INTEGER.
+     * The function accepts 2D_INTEGER_ARRAY arr as parameter.
+     */
+
+    public static int diagonalDifference(List<List<Integer>> arr) {
+    // Write your code here
+    int sum,i=0,z=0,sum1=0,sum2=0;
+    int ar[][]=new int[100][100];
+    List<Integer> c=new ArrayList<>();
+    Iterator itrr=arr.iterator();
+    while(itrr.hasNext())
+    {
+        c.addAll(arr.get(i));
+        i++;
+        itrr.next();
+    }
+    for(int j=0; j<i; j++)
+    {
+        for(int k=0; k<i; k++)
+        {
+           ar[j][k]=c.get(z);
+           z++;
+        }
+    }
+    for(int j=0; j<i; j++)
+    {
+        for(int k=0; k<i; k++)
+        {
+           if(j==k)
+            sum1=sum1+ar[j][k];
+           if(j+k==(i-1))
+            sum2=sum2+ar[j][k];
+        }
+    }
+    sum=Math.abs(sum1-sum2);
+    return sum;
+    }
+}
