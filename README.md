@@ -1,1 +1,1 @@
-# Geek-for-Geeks-problems
+# Problem-Solving
