@@ -1,0 +1,19 @@
+    //Finf the number of pairs(a,b) in an array that are divisible by 'k' and a<b.
+    
+    static int divisibleSumPairs(int n, int k, int[] a)
+    {
+        int[] r =  new int[k];
+        for(int i=0; i<n; i++)
+            r[a[i]%k]++;
+
+        int sum = 0;
+        sum += (r[0]*(r[0]-1))/2;
+    
+        for(int i=1; i<=k/2 && i!=k-i; i++)
+            sum += r[i]*r[k-i];
+        
+        if(k%2==0)
+            sum+= (r[k/2]*(r[k/2]-1))/2;
+            
+        return sum;
+    }
