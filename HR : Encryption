@@ -1,0 +1,29 @@
+
+static String encryption(String s) 
+    {
+        String str[] = s.trim().split(" ");
+        StringBuffer sb = new StringBuffer();
+        StringBuffer ans = new StringBuffer();
+        for(String x : str)
+            sb.append(x);
+        int len = sb.length();
+        double d = len;
+        double r,c;
+        r = Math.floor(Math.sqrt(d));
+        c = Math.ceil(Math.sqrt(d));
+        if(r*c < d)
+           r+=1;
+        int m = (int)r;
+        int n = (int)c;
+        for(int i=0; i<n; i++)
+        {
+            for(int j=0; j<m; j++)
+            {
+                int pos = i + (n*j);
+                if(pos<len)
+                    ans.append(sb.charAt(pos));
+            }
+            ans.append(" ");
+        }
+        return ans.toString();
+    }
