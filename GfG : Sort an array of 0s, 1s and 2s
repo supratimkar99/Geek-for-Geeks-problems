@@ -1,15 +1,18 @@
 //Given an array A of size N containing 0s, 1s, and 2s; you need to sort the array in ascending order.
+
 import java.util.*;
 import java.lang.*;
 import java.io.*;
 
-class GFG {
-	public static void main (String[] args) throws IOException{
+class GFG
+{
+	public static void main (String[] args) throws IOException
+	{
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		int t=Integer.parseInt(bf.readLine().trim());
 		while(t-- > 0)
 		{
-		    int n = Integer.parseInt(bf.readLine().trim());
+			int n = Integer.parseInt(bf.readLine().trim());
 		    String[] s = bf.readLine().trim().split(" ");
             int a[] = new int[n];
             int cnt0=-1,cnt2=-1;
