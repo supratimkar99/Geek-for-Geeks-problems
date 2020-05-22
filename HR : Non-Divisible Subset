@@ -1,0 +1,32 @@
+//Given a set of distinct integers, print the size of a maximal subset of S 
+//where the sum of any 2 numbers in S' is not evenly divisible by k.
+
+class Result
+{
+    public static int nonDivisibleSubset(int k, List<Integer> s) 
+    {
+        // Write your code here
+        ArrayList<Integer> al=new ArrayList<Integer>();
+        int[] rem = new int[k];
+        //Arrays.fill(rem, 0);
+        for(int i:s)
+        {
+            if(!al.contains(i))
+            {
+                al.add(i);
+                rem[i % k]++;
+            }
+        }
+        
+        if (k % 2 == 0) 
+            rem[k/2] = Math.min(rem[k/2], 1);
+            
+        int res = Math.min(rem[0],1);
+        
+        for(int i=1; i<=k/2; i++)
+        {
+            res += Math.max(rem[i],rem[k-i]);
+        } 
+        return res;
+    }
+}
