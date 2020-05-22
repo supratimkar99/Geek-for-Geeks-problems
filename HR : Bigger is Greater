@@ -1,0 +1,51 @@
+//The biggerIsGreater function should return the smallest lexicographically higher string possible from the given string or no answer.
+//lexicographical order means alphabetical order in terms of alphabets.
+
+//Given a word, create a new word by swapping some or all of its characters. This new word must meet two criteria:
+//It must be greater than the original word
+//It must be the smallest word that meets the first condition
+
+public class Solution
+{
+    static void swap(char[] s,int i,int j)
+    {
+        char t = s[i];
+        s[i] = s[j];
+        s[j] = t;
+    }
+    
+    static void sort(char[] s,int i)
+    {
+        char min = s[i+1];
+        int index = i+1;
+        {
+            for(int x=i+2; x<s.length; x++)
+                if(s[x]>s[i] && s[x]<min)
+                {
+                    min = s[x];
+                    index = x;
+                }
+                swap(s,i,index);
+            Arrays.sort(s,i+1,s.length);
+        }
+    }
+    
+    static String biggerIsGreater(String w)
+    {
+        StringBuffer sb = new StringBuffer();
+        char s[] = w.toCharArray();
+        for(int i=s.length-1; i>0; i--)
+        {
+            if(s[i]>s[i-1])
+            {
+                if(i==s.length-1)
+                    swap(s,i,i-1);
+                else
+                    sort(s,i-1);
+                sb.append(s);
+                return sb.toString();
+            }
+        }
+        return "no answer";
+    }
+}
