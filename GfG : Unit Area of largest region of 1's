@@ -1,0 +1,58 @@
+//Consider a matrix with N rows and M columns, where each cell contains either a ‘0’ or a ‘1’ 
+//and any cell containing a 1 is called a filled cell.
+//Two cells are said to be connected if they are adjacent to each other horizontally, vertically, or diagonally. 
+//If one or more filled cells are connected, they form a region. 
+//The task is to find the unit area of the largest region.
+
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+class GFG
+ {
+	public static void main (String[] args)throws IOException
+	{
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        int t = Integer.parseInt(bf.readLine().trim());
+        while(t-- > 0)
+        {
+            String[] s = bf.readLine().trim().split(" ");
+            int m = Integer.parseInt(s[0]);
+            int n = Integer.parseInt(s[1]);
+            String str[] = bf.readLine().trim().split(" ");
+            int mat[][] = new int[m][n];
+            for(int i=0; i<m; i++)
+                for(int j=0; j<n; j++)
+                    mat[i][j] = Integer.parseInt(str[(i*n) + j]);
+            
+            int max_len = 0,len;
+            for(int i=0; i<m; i++)
+                for(int j=0; j<n; j++)
+                    if(mat[i][j] == 1)
+                    {
+                        len = compute_length(mat, i, j);
+                        max_len = Math.max(len, max_len);
+                    }    
+            System.out.println(max_len);
+        }
+    }
+	
+	public static int compute_length( int[][] mat, int r, int c)
+	{
+	    int m = mat.length;
+	    int n = mat[0].length;
+	    
+	    if( r<0 || r>=m || c<0 || c>=n )
+	        return 0;
+        if( mat[r][c] == 0 )
+            return 0;
+        
+        mat[r][c] = 0;
+        int size = 1;
+        
+        for(int i=r-1; i<=r+1; i++)
+            for(int j=c-1; j<=c+1; j++)
+                size += compute_length( mat, i, j);
+            
+        return size;
+	}
+}
