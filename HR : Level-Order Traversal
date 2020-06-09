@@ -1,0 +1,65 @@
+//Level-order traversal - BFS of a Binary Search Tree.
+//Print space separated Level-order traversal of a BST given the root as input.
+/*
+             4
+          /     \
+        2         6
+      /   \     /   \
+     1     3   5     7
+  
+InOrder: 1 2 3 4 5 6 7
+PostOrder: 1 3 2 5 7 6 4
+PreOrder: 4 2 1 3 6 5 7
+Level-Order: 4 2 6 1 3 5 7
+
+*/
+
+class Solution
+{
+    public static Queue<Node> queue = new LinkedList<>();
+    static void levelOrder(Node root)
+    {
+        //Write your code here
+        if(root != null)
+            queue.offer(root);
+        
+        while(queue.peek()!=null)
+        {
+            Node t = queue.poll();
+            System.out.print(t.data+" ");
+
+            if(t.left != null)
+                queue.offer(t.left);
+
+            if(t.right != null)
+                queue.offer(t.right);
+        }
+    }
+}
+
+/*
+inOrder(t) {
+    if(t is not empty) {
+        inOrder( left subtree of t )
+        process t's root element
+        inOrder( right subtree of t )
+    } 
+}
+
+postOrder(t) {
+    if(t is not empty) {
+        postOrder( left subtree of t )
+        postOrder( right subtree of t )
+        process t's root element
+    } 
+}
+
+preOrder(t) {
+    if(t is not empty) {
+        process t's root element
+        preOrder( left subtree of t )
+        preOrder( right subtree of t )
+    } 
+}
+
+*/
