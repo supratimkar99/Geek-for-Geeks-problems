@@ -14,13 +14,13 @@ class Intersect
          // code here
          while(headA != null)
          {
-             headA.data = headA.data*(-1) - 1;    // Subtracting 1 for the cases where required node's value is 0.
+             headA.data = headA.data*(-1) - 1; //Subtracting 1 (adding 1 negative unit) for the cases where required node's value is 0. 
              headA = headA.next;
          }
         while(headB != null)
         {
             if(headB.data < 0)
-                return headB.data*(-1) - 1;
+                return headB.data*(-1) - 1;     //Subtracting 1 (adding 1 positive unit) to compensate for the previous subtraction. 
                 
             headB = headB.next;
         }
