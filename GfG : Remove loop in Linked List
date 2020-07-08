@@ -1,0 +1,66 @@
+//You are given a linked list of N nodes. The task is to remove the loop from the linked list, if present.
+/*
+Your task is to complete the function removeLoop().
+The only argument of the function is head pointer of the linked list. Do not print anything.
+Simply remove the loop in the list (if present) without disconnecting any nodes from the list.
+*/
+
+/*
+class Node
+{
+    int data;
+    Node next;
+}
+*/
+
+class solver
+{
+    public static void removeLoop(Node head)
+    {
+        if(head == null || head.next == null)
+            return;
+            
+        boolean isCycle = false;
+        
+        Node slow = head;
+        Node fast = head;
+        
+        //detecting cycle using Floyd's cycle detection algorithm
+        while(slow!=null && fast!=null && fast.next!=null)
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast)
+            {
+                isCycle = true;
+                break;
+            }
+        }
+        
+        if(!isCycle)
+            return;
+         
+        //if cycle is detected
+        
+        //special case : when loop starts from the first node
+        //fast points to a node in the cycle, we iterate it until the last node is reached which points to first node, and then we point it to null.
+        if(fast == head)
+        {
+            while(fast.next != head)
+                fast = fast.next;
+                
+            fast.next = null;
+            return;
+        }
+        
+        //algorithm to find the node which points to the starting node of the cycle, which is then pointed to null hence removing the cycle.
+        //the mathematics behind the algorithm makes sure the slow and fast pointer always meet at the start of the cycle.
+        slow = head;    
+        while(slow.next != fast.next)
+        {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        fast.next = null;
+    }
+}
