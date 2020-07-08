@@ -1,0 +1,43 @@
+//Given a linked list, return the node where the cycle begins. If there is no cycle, return null.
+
+//SOLUTION : using Floyd’s Cycle detection algorithm.
+
+public class Solution
+{
+    public ListNode detectCycle(ListNode head)
+    {
+        if(head == null || head.next == null)
+            return null;
+        
+        boolean isCycle = false;
+        
+        ListNode slow = head;
+        ListNode fast = head;
+        
+        //detecting cycle
+        while(slow!=null && fast!=null && fast.next!=null)
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast)
+            {
+                isCycle = true;
+                break;
+            }
+        }
+        
+        if(!isCycle)
+            return null;
+        
+        //finding the node where the loop begins
+        slow = head;
+        while(slow != fast)
+        {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        
+        //the mathematics behind this algorithm makes sure slow and fast meet at the starting node of the cycle.
+        return slow;
+    }
+}
